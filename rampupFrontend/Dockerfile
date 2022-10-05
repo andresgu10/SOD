@@ -1,0 +1,8 @@
+FROM node:18-alpine
+ARG PORT=3030
+WORKDIR /app
+COPY package*.json /app/
+RUN npm ci
+COPY . .
+EXPOSE ${PORT}
+CMD node server.js
