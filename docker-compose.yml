@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  frontend:
+    container_name: frontendContainer
+    image: 127.0.0.1:5000/prueba
+    build: /repos/rampupFrontend/.
+    ports: 
+      - 8082:8080
+
+  backend:
+    container_name: backendContainer
+    image: 127.0.0.2:5000/prueba
+    build: /repos/rampupBackend/.
+    ports:
+      - 8080:3333
+    environment:
+      - DB_NAME=movies
+      - DB_HOST=10.10.0.2
+      - DB_USER=school
+      - DB_PASS=school
+    networks:
+      lan:
+        ipv4_address: 192.168.0.5
+    
+
+networks:
+  lan:
+    driver: macvlan
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: "192.168.0.1"
