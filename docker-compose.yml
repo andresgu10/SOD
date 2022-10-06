@@ -7,6 +7,9 @@ services:
     build: /repos/rampupFrontend/.
     ports: 
       - 8082:8080
+    networks:
+      lan:
+        ipv4_address: 192.168.0.6
 
   backend:
     container_name: backendContainer
